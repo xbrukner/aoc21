@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import { countMeasurements } from './days/01';
+import { countMeasurements, countTriplets } from './days/01';
 
 interface TaskProps {
   day: number,
@@ -22,18 +22,17 @@ function Task({day, firstHalf, secondHalf}: TaskProps): JSX.Element {
     <h3>Day {day}</h3>
     <textarea onChange={onChange}></textarea>
     <div>
-      <span>Part 1: </span><span>{firstPart}</span>
+      <span>Part 1: </span><span>{firstPart}</span><br />
       {secondHalf && <><span>Part 2: </span><span>{secondPart}</span></>}
     </div> 
   </div>);
 }
-//function HalfDay
 
 function App() {
   return (
     <div className="App">
       <h2>Advent of Code 2021</h2>
-      <Task day={1} firstHalf={countMeasurements} />
+      <Task day={1} firstHalf={countMeasurements} secondHalf={countTriplets} />
     </div>
   );
 }
