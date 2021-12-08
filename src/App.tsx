@@ -4,6 +4,7 @@ import { Task01 } from './tasks/01';
 import { Task02 } from './tasks/02';
 import { Task03 } from './tasks/03';
 import { Task04 } from './tasks/04';
+import { Task05 } from './tasks/05';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Task02 />
       <Task03 />
       <Task04 />
+      <Task05 />
     </div>
   );
 }
