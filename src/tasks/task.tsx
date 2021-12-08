@@ -1,18 +1,23 @@
 import React, {useState} from 'react';
 
-interface TaskProps<Value> {
+interface TaskProps<Input> {
   day: number,
-  parser: (s: string) => Value
-  firstHalf: (list: Array<Value>) => number,
-  secondHalf?: (list: Array<Value>) => number
+  parser: (s: string) => Input,
+  firstHalf: (input: Input) => number,
+  secondHalf?: (list: Input) => number
 };
 
-export function Task<Value>({day, parser, firstHalf, secondHalf}: TaskProps<Value>): JSX.Element {
+export function parseLine<InputLine>(lineParser: (s: string) => InputLine): (s: string) => Array<InputLine> {
+    return (s) => s.split('\n').map(lineParser);
+}
+
+export function Task<Input>({day, parser, firstHalf, secondHalf}: TaskProps<Input>): JSX.Element {
   const [input, setInput] = useState('');
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => setInput(e.currentTarget.value);
 
-  const parse: (text: string) => Array<Value> = (text) => text.trim().split('\n').map(parser);
-  const parsed: Array<Value> | undefined = input && input.trim().length ? parse(input) : undefined;
+
+  const parse: (text: string) => Input = (text) => parser(text.trim());
+  const parsed: Input | undefined = input && input.trim().length ? parse(input) : undefined;
 
   const firstPart = parsed ? firstHalf(parsed) : '';
   const secondPart = secondHalf && parsed ? secondHalf(parsed) : '';

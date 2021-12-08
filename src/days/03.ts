@@ -1,4 +1,4 @@
-type Input = Array<Array<number>>
+export type Input = Array<Array<number>>
 export type Group = Map<number, number>
 
 export function emptyGroup(): Group {
@@ -10,12 +10,12 @@ export function parseLine(str: string): Array<number> {
 }
 
 
-export function rotate(input: Input): Input {
+export function rotate<Value>(input: Array<Array<Value>>): Array<Array<Value>> {
     if (!input[0].length) return [[]];
     return [...input[0].keys()].map(extractColumn(input));
 }
 
-function extractColumn(input: Input): (column: number) => number[] {
+function extractColumn<Value>(input: Array<Array<Value>>): (column: number) => Array<Value> {
     return (key) => input.map((arr) => arr[key]);
 }
 
