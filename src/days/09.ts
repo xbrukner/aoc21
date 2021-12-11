@@ -2,11 +2,11 @@ type Heightmap = Map<String, number>;
 
 type Sizelimits = [number, number];
 
-function toCoordinate([x, y]: [number, number]) : string {
+export function toCoordinate([x, y]: [number, number]) : string {
     return `${x},${y}`;
 }
 
-function fromCoordinate(str: String): [number, number] {
+export function fromCoordinate(str: String): [number, number] {
     return str.split(',').map(v => parseInt(v)) as [number, number];
 }
 
