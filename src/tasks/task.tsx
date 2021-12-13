@@ -4,7 +4,7 @@ interface TaskProps<Input> {
   day: number,
   parser: (s: string) => Input,
   firstHalf: (input: Input) => number,
-  secondHalf?: (list: Input) => number
+  secondHalf?: (list: Input) => number | string
 };
 
 export function parseLine<InputLine>(lineParser: (s: string) => InputLine): (s: string) => Array<InputLine> {
@@ -27,7 +27,7 @@ export function Task<Input>({day, parser, firstHalf, secondHalf}: TaskProps<Inpu
     <textarea onChange={onChange}></textarea>
     <div>
       <span>Part 1: </span><span>{firstPart}</span><br />
-      {secondHalf && <><span>Part 2: </span><span>{secondPart}</span></>}
+      {secondHalf && <><span>Part 2: </span><span>{typeof secondPart === 'number' ? secondPart : <pre>{secondPart}</pre>}</span></>}
     </div> 
   </div>);
 }
